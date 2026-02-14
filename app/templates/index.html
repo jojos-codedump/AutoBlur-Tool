@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoBlur Privacy Tool</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-user-secret"></i> AutoBlur</h1>
+            <p>Upload an image to automatically detect and blur text. Click boxes to toggle blurring.</p>
+        </header>
+
+        <div class="upload-section" id="upload-section">
+            <input type="file" id="file-input" accept="image/*" hidden>
+            <button class="btn primary" onclick="document.getElementById('file-input').click()">
+                <i class="fas fa-upload"></i> Upload Image
+            </button>
+        </div>
+
+        <div class="editor-section" id="editor-section" style="display: none;">
+            
+            <div class="toolbar">
+                <span id="status-text">Detected <strong id="box-count">0</strong> text regions.</span>
+                <div class="actions">
+                    <button class="btn secondary" onclick="resetEditor()">
+                        <i class="fas fa-trash"></i> Discard
+                    </button>
+                    <button class="btn primary" onclick="processAndDownload()">
+                        <i class="fas fa-download"></i> Apply Blur & Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="image-wrapper" id="image-wrapper">
+                <img id="target-image" src="" alt="Upload preview">
+                <div id="overlay-layer"></div>
+            </div>
+
+        </div>
+
+        <div class="loader" id="loader" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processing Image...</p>
+        </div>
+
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

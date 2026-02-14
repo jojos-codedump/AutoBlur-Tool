@@ -1,0 +1,208 @@
+/* --- Global Reset & Variables --- */
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #e74c3c;
+    --success-color: #2ecc71;
+    --background-color: #f4f7f6;
+    --text-color: #333;
+    --overlay-bg: rgba(231, 76, 60, 0.4); /* Red tint for blur box */
+    --overlay-border: 2px solid #e74c3c;
+    --overlay-bg-inactive: rgba(46, 204, 113, 0.2); /* Green tint for ignored box */
+    --overlay-border-inactive: 2px dashed #2ecc71;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Main Container --- */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: #666;
+}
+
+/* --- Upload Section --- */
+.upload-section {
+    padding: 3rem;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    background: #fafafa;
+    transition: background 0.3s;
+}
+
+.upload-section:hover {
+    background: #f0f0f0;
+    border-color: var(--primary-color);
+}
+
+/* --- Buttons --- */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary:hover {
+    background-color: #357abd;
+}
+
+.secondary {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.secondary:hover {
+    background-color: #d0d0d0;
+}
+
+/* --- Editor Section --- */
+.editor-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* --- Image Wrapper (Critical for Overlay) --- */
+.image-wrapper {
+    position: relative; /* Anchor point for absolute children */
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+/* The Image */
+#target-image {
+    display: block;
+    max-width: 100%;
+    height: auto; /* Maintains aspect ratio */
+}
+
+/* The Overlay Layer */
+#overlay-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Let clicks pass through to boxes, but not block image entirely */
+}
+
+/* --- Blur Boxes --- */
+.blur-box {
+    position: absolute;
+    background-color: var(--overlay-bg);
+    border: var(--overlay-border);
+    cursor: pointer;
+    pointer-events: auto; /* Catch clicks on the box itself */
+    transition: background-color 0.2s, border-color 0.2s;
+    z-index: 10;
+}
+
+/* Hover Effect */
+.blur-box:hover {
+    background-color: rgba(231, 76, 60, 0.6);
+}
+
+/* Inactive State (Green/Ignored) */
+.blur-box.inactive {
+    background-color: var(--overlay-bg-inactive);
+    border: var(--overlay-border-inactive);
+}
+
+.blur-box.inactive:hover {
+    background-color: rgba(46, 204, 113, 0.4);
+}
+
+/* --- Loader --- */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
