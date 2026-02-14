@@ -1,17 +1,9 @@
-# Web Framework
 fastapi
 uvicorn
 python-multipart
 jinja2
-
-# Data and Math (Crucial for stability)
-numpy>=1.23.0,<1.24.0
 shapely
 pydantic<2.0.0
-
-# Computer Vision
 opencv-python-headless
-
-# The Fixed AI Stack
 paddlepaddle==2.6.2
 paddleocr==2.7.3
